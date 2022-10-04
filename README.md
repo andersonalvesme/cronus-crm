@@ -31,7 +31,7 @@ Some images from project. For see all the screens, checkout and run it locally.
 ### Overview
 
 <kbd>
-<img src="https://github.com/andersonalvesme/cronus-crm/blob/master/_readme_images/overview.png.png" alt="Overview">
+<img src="https://github.com/andersonalvesme/cronus-crm/blob/master/_readme_images/overview.png" alt="Overview">
 </kbd>
 
 ### Leads
