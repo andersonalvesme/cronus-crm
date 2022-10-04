@@ -1,0 +1,45 @@
+.w-xs {
+  width: 90px;
+}
+
+table tbody tr {
+  cursor: pointer;
+}
+
+.message-container {
+  display: inline-block;
+  margin: 0 auto;
+  position: fixed;
+  z-index: 10310;
+  bottom: 20px;
+  left: 20px;
+}
+
+.row-line {
+  margin-bottom: 8px;
+}
+
+.badge {
+  width: 100%;
+  line-height: unset;
+}
+
+.modal-dialog-scrollable {
+  height: calc(100% - 3.5rem);
+}
+
+.modal-dialog-scrollable > .modal-content {
+  max-height: 100%;
+}
+
+.modal-dialog-scrollable > .modal-content > .modal-footer {
+  padding-top: .75rem;
+  border-top: 1px solid rgba(97, 105, 115, 0.1);
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgba(97, 105, 115, 0.1);
+}
+
+.template-preview {
+  height: 800px;
+}

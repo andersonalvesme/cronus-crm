@@ -1,0 +1,26 @@
+runtime: php
+env: flex
+
+runtime_config:
+  document_root: public
+
+skip_files:
+  - .env
+
+env_variables:
+  APP_LOG: errorlog
+  APP_KEY: base64:9YZ+SpLGYbooLKmiHb/vP4CelJGIcSWl5H/rovetz1w=
+  STORAGE_DIR: /tmp
+  CACHE_DRIVER: file
+  SESSION_DRIVER: file
+  ## Set these environment variables according to your CloudSQL configuration.
+  DB_HOST: localhost
+  DB_DATABASE: cronus
+  DB_USERNAME: root
+  DB_PASSWORD: YOUR_DB_PASSWORD
+  DB_SOCKET: "/cloudsql/YOUR_CLOUDSQL_CONNECTION_NAME"
+  
+beta_settings:
+    # for Cloud SQL, set this value to the Cloud SQL connection name,
+    # e.g. "project:region:cloudsql-instance"
+    cloud_sql_instances: "YOUR_CLOUDSQL_CONNECTION_NAME"
