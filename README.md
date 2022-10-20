@@ -2,7 +2,7 @@
 
 Cronus is a simple CRM solution for freelancers and small business owners.
 
-**This project was made based in [Flow CRM](https://github.com/anishdcruz/ck-flow)**
+This project was made based in Flow CRM.
 
 ## Quick setup
 
