@@ -4,6 +4,10 @@ Cronus is a simple CRM solution for freelancers and small business owners.
 
 This project was made based in Flow CRM.
 
+## Requisites
+
+- Node version v16.20.2
+
 ## Quick setup
 
 1. Install docker and docker-compose
