@@ -18,7 +18,7 @@
             <input type="hidden" name="_token" value="{{csrf_token()}}">
 
             <div class="card-body">
-                <h2 class="mb-5 text-center">Acesse sua conta</h2>
+                <h2 class="mb-5 text-center">{{__('auth.access_your_account')}}</h2>
 
                 <div class="mb-3">
                     <label class="form-label">{{__('lang.email')}}</label>
@@ -44,7 +44,7 @@
             </div>
         </form>
         <div class="text-center text-muted">
-            Não possui uma conta? <a href="{{ url('register') }}" tabindex="-1">Cadastre-se</a>
+            {{__('auth.dont_have_an_account')}}? <a href="{{ url('register') }}" tabindex="-1">{{__('lang.register')}}</a>
         </div>
     </div>
 </body>

@@ -32,20 +32,19 @@ After these steps you can access the project on [localhost](http://localhost)
 
 Some images from project. For see all the screens, checkout and run it locally.
 
-### Overview
+### Login
+![login.png](_readme_images%2Flogin.png)
 
-<kbd>
-<img src="https://github.com/andersonalvesme/cronus-crm/blob/master/_readme_images/overview.png" alt="Overview">
-</kbd>
+### Register
+![register.png](_readme_images%2Fregister.png)
+
+### Overview
+![overview.png](_readme_images%2Foverview.png)
+---
+![overview-black.png](_readme_images%2Foverview-black.png)
 
 ### Leads
+![leads.png](_readme_images%2Fleads.png)
 
-<kbd>
-<img src="https://github.com/andersonalvesme/cronus-crm/blob/master/_readme_images/leads.png" alt="Leads">
-</kbd>
-
-### Overview black
-
-<kbd>
-<img src="https://github.com/andersonalvesme/cronus-crm/blob/master/_readme_images/overview_black.png" alt="Overview black">
-</kbd>
+### Settings
+![settings.png](_readme_images%2Fsettings.png)

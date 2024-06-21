@@ -13,6 +13,11 @@ return [
     |
     */
 
+    'access_your_account' => 'Access your account',
+    'dont_have_an_account' => 'Don\'t have an account',
+    'create_an_account' => 'Create an account',
+    'already_have_an_account' => 'Already have an account',
+
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 

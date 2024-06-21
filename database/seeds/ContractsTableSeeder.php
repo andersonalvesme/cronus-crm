@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\Contract\Contract;
-use App\Models\Contract\Type;
 use App\Models\Contract\Status;
+use App\Models\Contract\Type;
 use Faker\Factory;
+use Illuminate\Database\Seeder;
 
 class ContractsTableSeeder extends Seeder
 {
@@ -17,32 +17,32 @@ class ContractsTableSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        foreach([
-            ['name' => 'Draft', 'color' => 'grey', 'locked' => true],
-            ['name' => 'Sent', 'color' => 'light_green'],
-            ['name' => 'Accepted', 'color' => 'blue'],
-            ['name' => 'Declined', 'color' => 'red'],
-            ['name' => 'Terminated', 'color' => 'orange']
-        ] as $c) {
+        foreach ([
+                     ['name' => 'Draft', 'color' => 'grey', 'locked' => true],
+                     ['name' => 'Sent', 'color' => 'light_green'],
+                     ['name' => 'Accepted', 'color' => 'blue'],
+                     ['name' => 'Declined', 'color' => 'red'],
+                     ['name' => 'Terminated', 'color' => 'orange']
+                 ] as $c) {
             Status::create($c);
         }
 
-        foreach([
-            ['name' => 'Project'],
-            ['name' => 'Annual Maintainance']
-        ] as $c) {
+        foreach ([
+                     ['name' => 'Project'],
+                     ['name' => 'Annual Maintainance']
+                 ] as $c) {
             Type::create($c);
         }
 
-        foreach(range(1, 50) as $i) {
+        foreach (range(1, 50) as $i) {
             Contract::create([
-                'title' => 'Contract Title 1'.$i,
-                'number' => 'PR1'.$i,
+                'title' => 'Contract Title 1' . $i,
+                'number' => 'PR1-' . $i,
                 'contact_id' => $i,
                 'proposal_id' => $i,
                 'template_id' => 2,
-                'start_date' => '2018-07-'.mt_rand(1, 28),
-                'expiry_date' => '2018-08-'.mt_rand(1, 28),
+                'start_date' => date("Y-m-", strtotime("-1 months")) . mt_rand(1, 28),
+                'expiry_date' => date('Y-m-') . mt_rand(1, 28),
                 'status_id' => mt_rand(1, 5),
                 'type_id' => mt_rand(1, 2),
                 'value' => $faker->numberBetween(1000, 90000),
@@ -51,14 +51,14 @@ class ContractsTableSeeder extends Seeder
             ]);
         }
 
-        foreach(range(1, 50) as $i) {
+        foreach (range(1, 50) as $i) {
             Contract::create([
-                'title' => 'Contract Title'.$i,
-                'number' => 'PR2'.$i,
+                'title' => 'Contract Title' . $i,
+                'number' => 'PR2-' . $i,
                 'contact_id' => $i,
                 'proposal_id' => $i,
                 'template_id' => 2,
-                'start_date' => '2018-07-'.mt_rand(1, 28),
+                'start_date' => date('Y-m-') . mt_rand(1, 28),
                 'expiry_date' => null,
                 'auto_renewal' => 1,
                 'no_of_months' => $faker->randomElement([6, 12]),

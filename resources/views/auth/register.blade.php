@@ -18,7 +18,7 @@
             <input type="hidden" name="_token" value="{{csrf_token()}}">
 
             <div class="card-body">
-                <h2 class="mb-5 text-center">Criar uma conta</h2>
+                <h2 class="mb-5 text-center">{{__('auth.create_an_account')}}</h2>
                 <div class="mb-3">
                     <label class="form-label">{{__('lang.name')}}</label>
                     <input type="text" name="name" value="{{old('name')}}" class="form-control">
@@ -48,7 +48,7 @@
                     @endif
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Quantidade de usuários</label>
+                    <label class="form-label">{{__('lang.number_of_users')}}</label>
                     <input type="number" name="active_users_limit" class="form-control"
                            value="{{ isset($_GET['active_users_limit']) ? $_GET['active_users_limit'] : 5 }}"
                            min="1" max="100">
@@ -63,7 +63,7 @@
         </form>
 
         <div class="text-center text-muted mb-8">
-            Já tem uma conta? <a href="{{ url('login') }}">Acesse agora</a>
+            {{__('auth.already_have_an_account')}}? <a href="{{ url('login') }}">{{__('lang.login')}}</a>
         </div>
     </div>
 </div>

@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\Lead\Lead;
 use App\Models\Lead\Status;
 use Faker\Factory;
+use Illuminate\Database\Seeder;
 
 class LeadsTableSeeder extends Seeder
 {
@@ -16,21 +16,21 @@ class LeadsTableSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        foreach([
-            ['name' => 'New', 'color' => 'grey', 'locked' => 1],
-            ['name' => 'Contacted', 'color' => 'blue'],
-            ['name' => 'Attempted to Contact', 'color' => 'orange'],
-            ['name' => 'Qualified', 'color' => 'green'],
-            ['name' => 'Disqualified', 'color' => 'red']
-        ] as $i) {
+        foreach ([
+                     ['name' => 'New', 'color' => 'grey', 'locked' => 1],
+                     ['name' => 'Contacted', 'color' => 'blue'],
+                     ['name' => 'Attempted to Contact', 'color' => 'orange'],
+                     ['name' => 'Qualified', 'color' => 'green'],
+                     ['name' => 'Disqualified', 'color' => 'red']
+                 ] as $i) {
             Status::create($i);
         }
 
-        foreach(range(1, 100) as $i) {
+        foreach (range(1, 100) as $i) {
             Lead::create([
                 'organization' => $faker->company,
                 'person' => $faker->name,
-                'number' => 'LD-'.$i,
+                'number' => 'LD-' . $i,
                 'phone' => $faker->phoneNumber,
                 'fax' => null,
                 'email' => $faker->unique()->safeEmail,

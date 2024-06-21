@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use App\Models\Organization\Organization;
 use App\Models\Organization\Category;
+use App\Models\Organization\Organization;
 use Faker\Factory;
+use Illuminate\Database\Seeder;
 
 class OrganizationsTableSeeder extends Seeder
 {
@@ -16,11 +16,15 @@ class OrganizationsTableSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        foreach(range(1, 50) as $i) {
+        foreach (['Category A', 'Category B', 'Category C'] as $c) {
+            Category::create(['name' => $c]);
+        }
+
+        foreach (range(1, 50) as $i) {
             Organization::create([
                 'organization_category_id' => mt_rand(1, 3),
                 'name' => $faker->company,
-                'number' => 'ORG-'.mt_rand(100, 3000).$i,
+                'number' => 'ORG-' . mt_rand(100, 3000) . $i,
                 'phone' => $faker->phoneNumber,
                 'fax' => $faker->phoneNumber,
                 'email' => $faker->unique()->safeEmail,

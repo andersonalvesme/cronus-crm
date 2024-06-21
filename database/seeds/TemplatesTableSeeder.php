@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use App\Models\Template\Template;
 use App\Models\Template\Page;
+use App\Models\Template\Template;
 use Faker\Factory;
+use Illuminate\Database\Seeder;
 
 class TemplatesTableSeeder extends Seeder
 {
@@ -40,9 +40,9 @@ class TemplatesTableSeeder extends Seeder
             'Acceptance of Quote'
         ];
 
-        foreach($names as $name) {
+        foreach ($names as $name) {
             $t = Template::create([
-                'name' => $name. ' Contract',
+                'name' => $name . ' Contract',
                 'type_id' => 2,
                 'page_size' => $faker->randomElement(['A4', 'legal']),
                 'orientation' => $faker->randomElement(['L', 'P']),
@@ -63,14 +63,14 @@ class TemplatesTableSeeder extends Seeder
 
             $tp = [];
             $i = 0;
-            foreach(array_random($pages, mt_rand(3, count($pages))) as $page) {
+            foreach (array_random($pages, mt_rand(3, count($pages))) as $page) {
                 $tp[] = new Page([
                     'title' => $page,
                     'name' => snake_case($page),
                     'orientation' => $t->orientation,
                     'instruction' => $faker->text,
                     'index' => $i,
-                    'page_html' => '<div class="page">'.$page.'</div>',
+                    'page_html' => '<div class="page">' . $page . '</div>',
                     'content_fields' => json_encode([
                         ['title' => __('lang.default'), 'name' => snake_case(__('lang.default')), 'fields' => $this->fields()]
                     ]),
@@ -83,7 +83,7 @@ class TemplatesTableSeeder extends Seeder
             $t->pages()->saveMany($tp);
         }
 
-        foreach($names as $name) {
+        foreach ($names as $name) {
             $t = Template::create([
                 'name' => $name,
                 'type_id' => 1,
@@ -106,14 +106,14 @@ class TemplatesTableSeeder extends Seeder
 
             $tp = [];
             $i = 0;
-            foreach(array_random($pages, mt_rand(3, count($pages))) as $page) {
+            foreach (array_random($pages, mt_rand(3, count($pages))) as $page) {
                 $tp[] = new Page([
                     'title' => $page,
                     'name' => snake_case($page),
                     'orientation' => $t->orientation,
                     'instruction' => $faker->text,
                     'index' => $i,
-                    'page_html' => '<div class="page">'.$page.'</div>',
+                    'page_html' => '<div class="page">' . $page . '</div>',
                     'content_fields' => json_encode([
                         ['title' => __('lang.default'), 'name' => snake_case(__('lang.default')), 'fields' => $this->fields()]
                     ]),
@@ -127,7 +127,7 @@ class TemplatesTableSeeder extends Seeder
         }
 
         $invoices = ['Invoice 1', 'Invoice 2'];
-        foreach($invoices as $name) {
+        foreach ($invoices as $name) {
             $t = Template::create([
                 'name' => $name,
                 'type_id' => 3,
@@ -150,14 +150,14 @@ class TemplatesTableSeeder extends Seeder
 
             $tp = [];
             $i = 0;
-            foreach(['Main'] as $page) {
+            foreach (['Main'] as $page) {
                 $tp[] = new Page([
                     'title' => $page,
                     'name' => snake_case($page),
                     'orientation' => $t->orientation,
                     'instruction' => $faker->text,
                     'index' => $i,
-                    'page_html' => '<div class="page">'.$page.'</div>',
+                    'page_html' => '<div class="page">' . $page . '</div>',
                     'content_fields' => json_encode([
                         ['title' => __('lang.default'), 'name' => snake_case(__('lang.default')), 'fields' => []]
                     ]),
@@ -171,7 +171,7 @@ class TemplatesTableSeeder extends Seeder
         }
 
         $invoices = ['Payment 1', 'Payment 2'];
-        foreach($invoices as $name) {
+        foreach ($invoices as $name) {
             $t = Template::create([
                 'name' => $name,
                 'type_id' => 4,
@@ -194,14 +194,14 @@ class TemplatesTableSeeder extends Seeder
 
             $tp = [];
             $i = 0;
-            foreach(['Main'] as $page) {
+            foreach (['Main'] as $page) {
                 $tp[] = new Page([
                     'title' => $page,
                     'name' => snake_case($page),
                     'orientation' => $t->orientation,
                     'instruction' => $faker->text,
                     'index' => $i,
-                    'page_html' => '<div class="page">'.$page.'</div>',
+                    'page_html' => '<div class="page">' . $page . '</div>',
                     'content_fields' => json_encode([
                         ['title' => __('lang.default'), 'name' => snake_case(__('lang.default')), 'fields' => []]
                     ]),
@@ -215,7 +215,7 @@ class TemplatesTableSeeder extends Seeder
         }
 
         $invoices = ['Expense 1', 'Expense 2'];
-        foreach($invoices as $name) {
+        foreach ($invoices as $name) {
             $t = Template::create([
                 'name' => $name,
                 'type_id' => 5,
@@ -238,14 +238,14 @@ class TemplatesTableSeeder extends Seeder
 
             $tp = [];
             $i = 0;
-            foreach(['Main'] as $page) {
+            foreach (['Main'] as $page) {
                 $tp[] = new Page([
                     'title' => $page,
                     'name' => snake_case($page),
                     'orientation' => $t->orientation,
                     'instruction' => $faker->text,
                     'index' => $i,
-                    'page_html' => '<div class="page">'.$page.'</div>',
+                    'page_html' => '<div class="page">' . $page . '</div>',
                     'content_fields' => json_encode([
                         ['title' => __('lang.default'), 'name' => snake_case(__('lang.default')), 'fields' => []]
                     ]),

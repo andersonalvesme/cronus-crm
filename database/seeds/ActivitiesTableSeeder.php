@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use App\Models\Activity\Activity;
 use App\Models\Activity\Type;
 use App\Models\Contact\Contact;
 use Faker\Factory;
+use Illuminate\Database\Seeder;
 
 class ActivitiesTableSeeder extends Seeder
 {
@@ -17,16 +16,16 @@ class ActivitiesTableSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        foreach([
-            ['name' => 'Phone Call', 'color' => 'blue'],
-            ['name' => 'Email', 'color' => 'green'],
-            ['name' => 'Meeting', 'color' => 'pink']
-        ] as $c) {
+        foreach ([
+                     ['name' => 'Phone Call', 'color' => 'blue'],
+                     ['name' => 'Email', 'color' => 'green'],
+                     ['name' => 'Meeting', 'color' => 'pink']
+                 ] as $c) {
             Type::create($c);
         }
 
-        foreach(Contact::all() as $contact) {
-            foreach(range(1, mt_rand(6, 10)) as $i) {
+        foreach (Contact::all() as $contact) {
+            foreach (range(1, mt_rand(6, 10)) as $i) {
                 $contact->activities()->create([
                     'date' => date('Y-m-d'),
                     'description' => $faker->text,

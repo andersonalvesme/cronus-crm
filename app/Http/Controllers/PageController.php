@@ -68,7 +68,7 @@ class PageController extends Controller
             'name' => __('lang.name'),
             'email' => __('lang.email'),
             'password' => __('lang.password'),
-            'active_users_limit' => 'Quantidade de usuários'
+            'active_users_limit' => __('lang.number_of_users')
         ];
         $this->validate($request, $rules, [], $niceNames);
 

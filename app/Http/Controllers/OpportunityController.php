@@ -2,34 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Contact\Contact;
+use App\Models\Opportunity\Category;
 use App\Models\Opportunity\Opportunity;
 use App\Models\Opportunity\Stage;
-use App\Models\Opportunity\Category;
-use App\Models\Opportunity\Source;
-use App\Models\Contact\Contact;
-use DB;
 use App\Services\ExportCSV;
+use DB;
+use Illuminate\Http\Request;
 
 class OpportunityController extends Controller
 {
-	public function typeahead()
-	{
-	    $results = Opportunity::typeahead(['number', 'title']);
+    public function typeahead()
+    {
+        $results = Opportunity::typeahead(['number', 'title']);
 
-	    return to_json([
-	        'results' => $results
-	    ]);
-	}
+        return to_json([
+            'results' => $results
+        ]);
+    }
 
-	public function search()
-	{
-	    return to_json([
-	        'collection' => Opportunity::when(request('contact_id'), function($query) {
+    public function search()
+    {
+        return to_json([
+            'collection' => Opportunity::when(request('contact_id'), function ($query) {
                 return $query->where('contact_id', request('contact_id'));
             })->search()
-	    ]);
-	}
+        ]);
+    }
 
     public function export()
     {
@@ -42,10 +41,10 @@ class OpportunityController extends Controller
     {
         $this->authorize('access', 'opportunities.index');
         $collection = Opportunity::with([
-                'category:id,name', 'stage:id,name,color'
-            ])->when(request('contact_id'), function($query) {
-                return $query->where('contact_id', request('contact_id'));
-            })->filter();
+            'category:id,name', 'stage:id,name,color'
+        ])->when(request('contact_id'), function ($query) {
+            return $query->where('contact_id', request('contact_id'));
+        })->filter();
 
         return to_json([
             'collection' => $collection
@@ -72,7 +71,7 @@ class OpportunityController extends Controller
             'custom_fields' => custom_fields('opportunities', "[]")
         ];
 
-        if(request()->has('contact_id')) {
+        if (request()->has('contact_id')) {
             $f = Contact::findOrFail(request()->contact_id);
             $form['contact_id'] = $f->id;
             $form['contact'] = [
@@ -83,7 +82,7 @@ class OpportunityController extends Controller
 
         $id = settings()->get('default_opportunity_category_id');
 
-        if($id) {
+        if ($id) {
             $c = Category::findOrFail($id);
             $form['category'] = [
                 'name' => $c->name,
@@ -95,7 +94,7 @@ class OpportunityController extends Controller
 
         $id = settings()->get('default_opportunity_source_id');
 
-        if($id) {
+        if ($id) {
             $c = Category::findOrFail($id);
             $form['source'] = [
                 'name' => $c->name,
@@ -107,13 +106,13 @@ class OpportunityController extends Controller
 
         $id = settings()->get('default_probability');
 
-        if($id) {
+        if ($id) {
             $form['probability'] = $id;
         }
 
         $id = settings()->get('close_after_x_days');
 
-        if($id) {
+        if ($id) {
             $form['close_date'] = now()->addDays($id)->format('Y-m-d');
         }
 
@@ -127,7 +126,7 @@ class OpportunityController extends Controller
         $this->authorize('access', 'opportunities.create');
         $request->validate([
             'contact_id' => 'required|integer|exists:contacts,id',
-        	'title' => 'required|string',
+            'title' => 'required|string',
             'description' => 'required',
             'probability' => 'required|integer',
             'start_date' => 'required|date_format:Y-m-d',
@@ -144,7 +143,7 @@ class OpportunityController extends Controller
 
         $id = settings()->get('opportunity_stage_on_create_id');
 
-        if($id) {
+        if ($id) {
             $c = Stage::findOrFail($id);
             $opportunity->stage_id = $c->id;
         } else {
@@ -153,7 +152,7 @@ class OpportunityController extends Controller
 
         $opportunity->status_id = 'open';
 
-        $opportunity = DB::transaction(function() use ($opportunity) {
+        $opportunity = DB::transaction(function () use ($opportunity) {
             $c = counter('opportunity');
             $opportunity->number = $c->number;
             $opportunity->save();
@@ -172,10 +171,10 @@ class OpportunityController extends Controller
     {
         $this->authorize('access', 'opportunities.show');
         $opportunity = Opportunity::with([
-        	'category:id,name', 'stage:id,name,color', 'source:id,name',
+            'category:id,name', 'stage:id,name,color', 'source:id,name',
             'contact:id,name,number'
-        	])
-        	->findOrFail($id);
+        ])
+            ->findOrFail($id);
 
         $opportunity->all_stages = Stage::where('locked', 0)->get();
         $opportunity->custom_fields = custom_fields_preview('opportunities', $opportunity->custom_values);
@@ -191,7 +190,7 @@ class OpportunityController extends Controller
         $opportunity = Opportunity::with([
             'category:id,name', 'stage:id,name,color', 'source:id,name',
             'contact:id,name,number'
-            ])
+        ])
             ->findOrFail($id);
 
         $opportunity->custom_fields = custom_fields('opportunities', $opportunity->custom_values);
@@ -259,7 +258,7 @@ class OpportunityController extends Controller
             case 'won':
                 $id = settings()->get('opportunity_stage_on_win_id');
 
-                if($id) {
+                if ($id) {
                     $c = Stage::findOrFail($id);
                     $lead->stage_id = $c->id;
                 }
@@ -268,7 +267,7 @@ class OpportunityController extends Controller
             case 'lost':
                 $id = settings()->get('opportunity_stage_on_lost_id');
 
-                if($id) {
+                if ($id) {
                     $c = Stage::findOrFail($id);
                     $lead->stage_id = $c->id;
                 }
@@ -292,11 +291,11 @@ class OpportunityController extends Controller
         $this->authorize('access', 'opportunities.delete');
         $model = Opportunity::findOrFail($id);
 
-        if(DB::table('proposals')->where('opportunity_id', $model->id)->count()) {
+        if (DB::table('proposals')->where('opportunity_id', $model->id)->count()) {
             return delete_first(__('lang.cannot_delete'));
         }
 
-        if(DB::table('expenses')->where('opportunity_id', $model->id)->count()) {
+        if (DB::table('expenses')->where('opportunity_id', $model->id)->count()) {
             return delete_first(__('lang.cannot_delete'));
         }
 

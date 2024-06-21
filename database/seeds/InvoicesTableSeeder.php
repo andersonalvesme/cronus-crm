@@ -1,10 +1,8 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\Invoice\Invoice;
 use App\Models\Invoice\Status;
-use App\Models\Invoice\Line;
-use Faker\Factory;
+use Illuminate\Database\Seeder;
 
 class InvoicesTableSeeder extends Seeder
 {
@@ -15,29 +13,27 @@ class InvoicesTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Factory::create();
-
-        foreach([
-            ['name' => 'Draft', 'color' => 'grey', 'locked' => 1],
-            ['name' => 'Sent', 'color' => 'light_green'],
-            ['name' => 'Payment Requested', 'color' => 'pink', 'locked' => 1],
-            ['name' => 'Paid', 'color' => 'blue', 'locked' => 1],
-            ['name' => 'Partially Paid', 'color' => 'light_blue', 'locked' => 1],
-            ['name' => 'Void', 'color' => 'red']
-        ] as $c) {
+        foreach ([
+                     ['name' => 'Draft', 'color' => 'grey', 'locked' => 1],
+                     ['name' => 'Sent', 'color' => 'light_green'],
+                     ['name' => 'Payment Requested', 'color' => 'pink', 'locked' => 1],
+                     ['name' => 'Paid', 'color' => 'blue', 'locked' => 1],
+                     ['name' => 'Partially Paid', 'color' => 'light_blue', 'locked' => 1],
+                     ['name' => 'Void', 'color' => 'red']
+                 ] as $c) {
             Status::create($c);
         }
 
-        foreach(range(1, 100) as $i) {
+        foreach (range(1, 100) as $i) {
             $total = mt_rand(100, 990);
-            $inv = Invoice::create([
-                'number' => 'INV'.$i,
+            Invoice::create([
+                'number' => 'IN-' . $i,
                 'contact_id' => $i,
                 'proposal_id' => $i,
                 'contract_id' => null,
                 'template_id' => 3,
-                'issue_date' => '2018-07-'.mt_rand(1, 28),
-                'due_date' => '2018-08-'.mt_rand(1, 28),
+                'issue_date' => date('Y-m-') . mt_rand(1, 28),
+                'due_date' => date('Y-m-') . mt_rand(1, 28),
                 'status_id' => mt_rand(1, 4),
                 'reference' => null,
                 'sub_total' => $total,

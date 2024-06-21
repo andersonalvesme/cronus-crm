@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use App\Models\Payment\Payment;
 use App\Models\Payment\Deposit;
-use App\Models\Payment\Method;
 use App\Models\Payment\Line;
+use App\Models\Payment\Method;
+use App\Models\Payment\Payment;
 use Faker\Factory;
+use Illuminate\Database\Seeder;
 
 class PaymentsTableSeeder extends Seeder
 {
@@ -18,30 +18,30 @@ class PaymentsTableSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        foreach([
-            ['name' => 'Cash'],
-            ['name' => 'Cheque'],
-            ['name' => 'Credit Card'],
-            ['name' => 'Bank Transfer'],
-        ] as $c) {
+        foreach ([
+                     ['name' => 'Cash'],
+                     ['name' => 'Cheque'],
+                     ['name' => 'Credit Card'],
+                     ['name' => 'Bank Transfer'],
+                 ] as $c) {
             Method::create($c);
         }
 
-        foreach([
-            ['name' => 'Undeposited Funds'],
-            ['name' => 'Bank A'],
-            ['name' => 'Bank B'],
-            ['name' => 'Bank C'],
-        ] as $c) {
+        foreach ([
+                     ['name' => 'Undeposited Funds'],
+                     ['name' => 'Bank A'],
+                     ['name' => 'Bank B'],
+                     ['name' => 'Bank C'],
+                 ] as $c) {
             Deposit::create($c);
         }
 
-        foreach(range(1, 100) as $i) {
+        foreach (range(1, 100) as $i) {
             $a = $faker->numberBetween(1000, 40000);
             $p = Payment::create([
-                'number' => 'PAY-'.$i,
+                'number' => 'PAY-' . $i,
                 'contact_id' => $i,
-                'payment_date' => '2018-07-'.mt_rand(1, 28),
+                'payment_date' => date('Y-m-') . mt_rand(1, 28),
                 'method_id' => mt_rand(1, 4),
                 'reference' => str_random(5, 10),
                 'deposit_id' => mt_rand(1, 4),

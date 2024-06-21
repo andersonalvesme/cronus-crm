@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\CustomField;
+use Illuminate\Database\Seeder;
 
 class CustomFieldsTableSeeder extends Seeder
 {
@@ -231,7 +231,7 @@ class CustomFieldsTableSeeder extends Seeder
             ]
         ];
 
-        foreach($models as $model) {
+        foreach ($models as $model) {
             CustomField::create($model);
         }
     }
